@@ -1,7 +1,11 @@
 package com.gumtree.customer.service.impl;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +33,7 @@ public class CustomerDetailsServiceImpl implements CustomerDetailsService {
 	 * @param gender gender to count customer
 	 * @return number of customer for provided gender
 	 */
+	@Override
 	public Long getNumberOfCustomerByGender(String gender) {
 		List<CustomerDetails> listCustomerDetails = readFileService
 				.getCustomerDetailsAsListFromInputFile();
@@ -41,6 +46,9 @@ public class CustomerDetailsServiceImpl implements CustomerDetailsService {
 		return 0L;
 	}
 
+	/**
+	 * @return Full name of the oldest customer
+	 */
 	@Override
 	public String getOldestCustomer() {
 		List<CustomerDetails> listCustomerDetails = readFileService
@@ -55,8 +63,28 @@ public class CustomerDetailsServiceImpl implements CustomerDetailsService {
 		return null;
 	}
 
+	/**
+	 * @param cust1 first name of first customer to get the age difference
+	 * @param cust2 first name of second customer to get the age difference
+	 * @return The age difference in number of days.
+	 */
 	@Override
 	public Long getAgeDifferenceOfCustomersInDays(String cust1, String cust2) {
-		return null;
+		List<CustomerDetails> listCustomerDetails = readFileService
+				.getCustomerDetailsAsListFromInputFile();
+		List<CustomerDetails> custToFindAgeDiff = new ArrayList<>();
+		if(listCustomerDetails != null) {
+			custToFindAgeDiff = listCustomerDetails
+				.stream()
+				.filter(x -> (x.getFirstName().equalsIgnoreCase(cust1) 
+						|| x.getFirstName().equalsIgnoreCase(cust2))
+				).collect(Collectors.toList());
+		}
+		if(custToFindAgeDiff.size() == 2) {
+			return DAYS.between(custToFindAgeDiff.get(0).getBirthDate(), custToFindAgeDiff.get(1).getBirthDate());
+		} else {
+			logger.info("customer doesnt exists in file");
+			return null;
+		}
 	}
 }

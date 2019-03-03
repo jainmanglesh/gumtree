@@ -42,13 +42,14 @@ public class ReadFileServiceImpl implements ReadFileService {
 	 * @return a list of customer mapped from address book
 	 */
 	@SuppressWarnings("resource")
+	@Override
 	public List<CustomerDetails> getCustomerDetailsAsListFromInputFile() {
 		Stream<String> streamStr = null;
 		try {
 			 streamStr = Files.lines(
 					 Paths.get(fileLocation));
 		} catch (IOException e) {
-			logger.error("File does not exist." + e.getMessage());
+			logger.info("File does not exist." + e.getMessage());
 			return null;
 		}
 		if(streamStr == null) {

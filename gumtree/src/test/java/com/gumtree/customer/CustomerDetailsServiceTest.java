@@ -72,6 +72,11 @@ public class CustomerDetailsServiceTest {
 
 	@Test
 	public void testGetAgeDifferenceOfCustomersInDays() {
+		when(readFileService.getCustomerDetailsAsListFromInputFile()).thenReturn(listCustomer);
+
+		assertTrue(customerDetailsService
+				.getAgeDifferenceOfCustomersInDays
+					(listCustomer.get(0).getFirstName(), listCustomer.get(1).getFirstName()).longValue() == 2862);
 		
 	}
 }
