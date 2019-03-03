@@ -1,5 +1,7 @@
 package com.gumtree.customer.model;
 
+import java.time.LocalDate;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -18,7 +20,7 @@ public class CustomerDetails {
 
 	private String gender;
 
-	private String birthDate;
+	private LocalDate birthDate;
 
 	public String getFullName() {
 		return this.getFirstName() + " " + this.getLastName();
