@@ -8,6 +8,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * @author MJain
+ *
+ * Model class to hold Customer Details
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

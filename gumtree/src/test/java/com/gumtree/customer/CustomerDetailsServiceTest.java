@@ -1,6 +1,7 @@
 package com.gumtree.customer;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
@@ -21,6 +22,10 @@ import com.gumtree.customer.model.CustomerDetails;
 import com.gumtree.customer.service.CustomerDetailsService;
 import com.gumtree.customer.service.ReadFileService;
 
+/**
+ * @author MJain
+ * Test class
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class CustomerDetailsServiceTest {
@@ -60,7 +65,9 @@ public class CustomerDetailsServiceTest {
 
 	@Test
 	public void testGetOldestCustomer() {
-		
+		when(readFileService.getCustomerDetailsAsListFromInputFile()).thenReturn(listCustomer);
+
+		assertTrue(customerDetailsService.getOldestCustomer().equals("Wes Jackson"));
 	}
 
 	@Test

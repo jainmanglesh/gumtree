@@ -19,6 +19,12 @@ import org.springframework.stereotype.Service;
 import com.gumtree.customer.model.CustomerDetails;
 import com.gumtree.customer.service.ReadFileService;
 
+/**
+ * @author Mjain
+ *
+ * This class is to read the input file and map to java object.
+ * 1. input addressbook file is mapped to CustomerDetails object.
+ */
 @Service
 public class ReadFileServiceImpl implements ReadFileService {
 
